@@ -1,5 +1,4 @@
-# mitadmission.github.io
-this website is an educational website
+
 next.config.jspackage.json
 {
  "name": "massachusettsadmissions-site",
