@@ -20,4 +20,11 @@ next.config.jspackage.json
 }next.config.js
 module.exports = {
  reactStrictMode: true,
-};
+};next.config.js
+module.exports = {
+ reactStrictMode: true,
+};.env.example
+ADMIN_TOKEN=replace_with_a_strong_token
+GOOGLE_CLOUD_PROJECT=your-project-id
+GCS_BUCKET=your-storage-bucket-name
+NEXT_PUBLIC_SITE_URL=https://massachusettsadmissions.com
