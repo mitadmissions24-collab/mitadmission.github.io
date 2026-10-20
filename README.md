@@ -1,4 +1,4 @@
-noFROM node:18-alpine AS runner
+oknoFROM node:18-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app ./
@@ -138,4 +138,19 @@ html {
  box-sizing: border-box;
 }a {
  text-decoration: none;
+}input, textarea, select, button {
+ font: inherit;
+}.page-shell {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 24px;
+}.card {
+ background: #fff;
+ border: 1px solid #e5e7eb;
+ border-radius: 12px;
+ box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}.container {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 0 16px;
 }
