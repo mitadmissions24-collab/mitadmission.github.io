@@ -63,4 +63,46 @@ name: deploy-to-cloud-runon:
  push:
  branches: [ main ]jobs:
  deploy:
- runs-on: ubuntu-latest
+ runs-on: ubuntu-lateststeps:
+  - name: Checkout source
+    uses: actions/checkout@v4
+
+  - name: Set up Node.js
+    uses: actions/setup-node@v4
+    with:
+      node-version: 18
+
+  - name: Install dependencies
+    run: npm install
+
+  - name: Build app
+    run: npm run build
+
+  - name: Authenticate to Google Cloud
+    uses: google-github-actions/auth@v2
+    with:
+      credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+  - name: Set up Cloud SDK
+    uses: google-github-actions/setup-gcloud@v2
+    with:
+      project_id: ${{ secrets.GCP_PROJECT_ID }}
+      install_components: "gke-gcloud-auth-plugin"
+
+  - name: Configure Docker for Artifact Registry
+    run: |
+      gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
+
+  - name: Build and push image to Artifact Registry
+    run: |
+      docker build -t us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/ma-admissions-site:${{ github.sha }} .
+      docker push us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/ma-admissions-site:${{ github.sha }}
+
+  - name: Deploy to Cloud Run
+    run: |
+      gcloud run deploy ma-admissions-site \
+        --image=us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/cloud-run-source-deploy/ma-admissions-site:${{ github.sha }} \
+        --region=${{ secrets.GCP_REGION }} \
+        --platform=managed \
+        --allow-unauthenticated \
+        --set-env-vars="GOOGLE_CLOUD_PROJECT=${{ secrets.GCP_PROJECT_ID }},GCS_BUCKET=${{ secrets.GCS_BUCKET }},ADMIN_TOKEN=${{ secrets.ADMIN_TOKEN }},NEXT_PUBLIC_SITE_URL=https://massachusettsadmissions.com"
