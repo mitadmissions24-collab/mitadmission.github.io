@@ -1,4 +1,9 @@
-
+FROM node:18-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app ./
+EXPOSE 8080
+CMD ["npm", "start"]
 next.config.jspackage.json
 {
  "name": "massachusettsadmissions-site",
@@ -48,4 +53,14 @@ uploads
 FROM node:18-alpine AS deps
 WORKDIR /app
 COPY package.json ./
-RUN npm install
+RUN npm installFROM node:18-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app ./
+EXPOSE 8080
+CMD ["npm", "start"].github/workflows/deploy.yml
+name: deploy-to-cloud-runon:
+ push:
+ branches: [ main ]jobs:
+ deploy:
+ runs-on: ubuntu-latest
