@@ -126,4 +126,16 @@ Allow: /https://massachusettsadmissions.com/sitemap.xmlSitemap: https://massachu
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-</urlset>
+</urlset>styles/globals.css
+html {
+ scroll-behavior: smooth;
+}body {
+ margin: 0;
+ font-family: Arial, Helvetica, sans-serif;
+ background: #f7f7f7;
+ color: #111827;
+}{
+ box-sizing: border-box;
+}a {
+ text-decoration: none;
+}
