@@ -28,3 +28,24 @@ ADMIN_TOKEN=replace_with_a_strong_token
 GOOGLE_CLOUD_PROJECT=your-project-id
 GCS_BUCKET=your-storage-bucket-name
 NEXT_PUBLIC_SITE_URL=https://massachusettsadmissions.com
+.gitignore
+node_modules/
+.next/
+.env
+.env.local
+npm-debug.log
+.DS_Store
+uploads/
+.log.gcloudignore
+node_modules/
+.env
+.env.local
+.next
+.git
+.gitignore
+uploads
+.logDockerfile
+FROM node:18-alpine AS deps
+WORKDIR /app
+COPY package.json ./
+RUN npm install
