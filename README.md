@@ -1,4 +1,4 @@
-FROM node:18-alpine AS runner
+noFROM node:18-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app ./
@@ -105,4 +105,6 @@ name: deploy-to-cloud-runon:
         --region=${{ secrets.GCP_REGION }} \
         --platform=managed \
         --allow-unauthenticated \
-        --set-env-vars="GOOGLE_CLOUD_PROJECT=${{ secrets.GCP_PROJECT_ID }},GCS_BUCKET=${{ secrets.GCS_BUCKET }},ADMIN_TOKEN=${{ secrets.ADMIN_TOKEN }},NEXT_PUBLIC_SITE_URL=https://massachusettsadmissions.com"
+        --set-env-vars="GOOGLE_CLOUD_PROJECT=${{ secrets.GCP_PROJECT_ID }},GCS_BUCKET=${{ secrets.GCS_BUCKET }},ADMIN_TOKEN=${{ secrets.ADMIN_TOKEN }},NEXT_PUBLIC_SITE_URL=https://massachusettsadmissions.com"public/robots.txt
+User-agent: 
+Allow: /https://massachusettsadmissions.com/sitemap.xmlSitemap: https://massachusettsadmissions.com/sitemap.xml<?xml version="1.0" encoding="UTF-8"?>
