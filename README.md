@@ -1,4 +1,32 @@
-oknoFROM node:18-alpine AS runner
+.container {
+ max-width: 1200px;
+ margin: 0 auto;
+ padding: 0 16px;
+}.btn-primary {
+ display: inline-block;
+ background: #0a2f5a;
+ color: #fff;
+ border: none;
+ border-radius: 10px;
+ font-weight: 600;
+ padding: 12px 18px;
+ cursor: pointer;
+}.btn-secondary {
+ display: inline-block;
+ background: #fff;
+ color: #0a2f5a;
+ border: 1px solid #0a2f5a;
+ border-radius: 10px;
+ font-weight: 600;
+ padding: 12px 18px;
+ cursor: pointer;
+}.field {
+ width: 100%;
+ padding: 12px 14px;
+ border: 1px solid #d1d5db;
+ border-radius: 10px;
+ background: white;
+}oknoFROM node:18-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=builder /app ./
